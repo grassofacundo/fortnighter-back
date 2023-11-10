@@ -11,6 +11,7 @@ const {
     //multerConfig,
 } = require("./middlewares/initialization");
 const { errorHandler } = require("./middlewares/error");
+const { isAuth } = require("./middlewares/is-auth");
 const app = express();
 //#endregion
 
@@ -20,6 +21,7 @@ app.use(bodyParser.json());
 app.use(headersConfig);
 
 //Routes
+app.all(new RegExp("^((?!/auth).)*$"), isAuth); //Match every path instead of /auth
 app.use("/auth", AuthRouter);
 app.use("/job", jobRouter);
 

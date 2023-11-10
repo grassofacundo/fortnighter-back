@@ -6,8 +6,9 @@ const { isAuth } = require("../middlewares/is-auth");
 const router = require("express").Router();
 //#endregion
 
-router.get("/get-all", isAuth, getAllJobs);
-router.put("/create", isAuth, validCreateJob, createJob);
+router.get("/get-all", getAllJobs);
+router.put("/create", validCreateJob, createJob);
+router.put("/edit", validCreateJob, createJob);
 //router.delete("/delete/:jobId", isAuth, deleteJob);
 
 module.exports = router;
