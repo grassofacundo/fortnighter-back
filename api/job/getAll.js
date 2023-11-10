@@ -13,9 +13,13 @@ exports.getAllJobs = async (req, res, next) => {
         if (userWithJob?.jobs.length > 0) {
             userWithJob.jobs.forEach((job) => {
                 jobList.push({
-                    id: job._id.toString(),
+                    id: getId(job),
                     name: job.positionName,
-                    isSelected: false,
+                    hourPrice: job.hourPrice,
+                    cycleEnd: job.cycleEnd,
+                    isFortnightly: job.isFortnightly,
+                    description: job.description,
+                    address: job.address,
                 });
             });
         }

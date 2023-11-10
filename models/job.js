@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose");
 
 const jobSchema = new Schema(
     {
-        positionName: {
+        name: {
             type: String,
             required: true,
         },
