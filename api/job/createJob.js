@@ -36,21 +36,18 @@ exports.createJob = async (req, res, next) => {
         user.jobs.push(savedJob._id);
         await user.save();
         res.status(201).json({
-            message: "Job position created successfully",
-            jobPosition: {
-                id: getId(savedJob),
-                name,
-                hourPrice,
-                cycleEnd,
-                isFortnightly,
-                companyName,
-                description,
-                address,
-            },
+            id: getId(savedJob),
+            name,
+            hourPrice,
+            cycleEnd,
+            isFortnightly,
+            companyName,
+            description,
+            address,
         });
     } catch (error) {
         next(error);
     }
 };
 
-exports.validCreateJob = [body("positionName").trim().not().isEmpty()];
+exports.validCreateJob = [body("name").trim().not().isEmpty()];
