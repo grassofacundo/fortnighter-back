@@ -2,6 +2,7 @@
 const userModel = require("../../models/user");
 const jobModel = require("../../models/job");
 const { setError } = require("../../utils/error-setter");
+const { getId } = require("../../utils/tools");
 //#endregion
 
 exports.getAllJobs = async (req, res, next) => {
@@ -14,7 +15,7 @@ exports.getAllJobs = async (req, res, next) => {
             userWithJob.jobs.forEach((job) => {
                 jobList.push({
                     id: getId(job),
-                    name: job.positionName,
+                    name: job.name,
                     hourPrice: job.hourPrice,
                     cycleEnd: job.cycleEnd,
                     isFortnightly: job.isFortnightly,
