@@ -7,7 +7,8 @@ const AuthRouter = require("./routes/auth");
 const bodyParser = require("body-parser");
 const { connect } = require("mongoose");
 const {
-    headersConfig,
+    //headersConfig,
+    corsConfig,
     //multerConfig,
 } = require("./middlewares/initialization");
 const { errorHandler } = require("./middlewares/error");
@@ -15,17 +16,35 @@ const { isAuth } = require("./middlewares/is-auth");
 const app = express();
 //#endregion
 
+/*
+ *
+ * Initial configuration
+ *
+ */
+app.use("*", corsConfig);
 //app.use(multerConfig);
 app.use(bodyParser.json());
 //app.use("/images", express.static(path.join(__dirname, "images")));
-app.use(headersConfig);
+//app.use(headersConfig);
 
-//Routes
-app.all(new RegExp("^((?!/auth).)*$"), isAuth); //Match every path instead of /auth
+/*
+ *
+ * AAuthentication check
+ *
+ */
+app.use(new RegExp("^((?!/auth).)*$"), isAuth); //Match every path except for /auth
+/*
+ *
+ * Routes
+ *
+ */
 app.use("/auth", AuthRouter);
 app.use("/job", jobRouter);
-
-//Error handler
+/*
+ *
+ * Error handler
+ *
+ */
 app.use(errorHandler);
 
 connect(process.env.MONGOOSE_CONNECTION_STRING)
