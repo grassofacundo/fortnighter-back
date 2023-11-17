@@ -12,27 +12,20 @@ const shiftSchema = new Schema(
             ref: "Job",
             required: true,
         },
-        workdays: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: "WorkDay",
-            },
-        ],
+        startTime: {
+            type: Date,
+            required: true,
+        },
+        endTime: {
+            type: Date,
+            required: true,
+        },
+        isHoliday: {
+            type: Boolean,
+            required: true,
+        },
     },
     { timestamps: true }
 );
 
 module.exports = model("Shift", shiftSchema);
-/*
-Shifts
-    {
-        user: user.id
-        job: job.id
-        workdays: [
-            workday,
-            workday,
-            workday,
-            workday...
-        ]
-    }
-*/
