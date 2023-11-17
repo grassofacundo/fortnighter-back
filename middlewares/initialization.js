@@ -2,18 +2,6 @@ const cors = require("cors");
 const multer = require("multer");
 const { v4: uuidv4 } = require("uuid");
 
-// exports.headersConfig = (req, res, next) => {
-//     res.setHeader("Access-Control-Allow-Origin", "*"); //codepen.oi, google.com, etc
-//     res.setHeader(
-//         "Access-Control-Allow-Methods",
-//         "GET, POST, PUT, PATCH, DELETE"
-//     );
-//     res.setHeader(
-//         "Access-Control-Allow-Headers",
-//         "Content-Type, Authorization"
-//     );
-//     next();
-// };
 const corsOptions = {
     allowedHeaders: ["Content-Type", "Authorization"],
 };
