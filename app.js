@@ -4,6 +4,7 @@ const express = require("express");
 require("dotenv").config();
 const jobRouter = require("./routes/job");
 const AuthRouter = require("./routes/auth");
+const ShiftRouter = require("./routes/shift");
 const bodyParser = require("body-parser");
 const { connect } = require("mongoose");
 const {
@@ -39,6 +40,7 @@ app.use(new RegExp("^((?!/auth).)*$"), isAuth); //Match every path except for /a
  */
 app.use("/auth", AuthRouter);
 app.use("/job", jobRouter);
+app.use("/shift", ShiftRouter);
 /*
  *
  * Error handler

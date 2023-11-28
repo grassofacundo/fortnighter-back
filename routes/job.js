@@ -1,7 +1,6 @@
 //#region Dependency list
 const { validCreateJob, createJob } = require("../api/job/createJob");
 const { getAllJobs } = require("../api/job/getAll");
-const { isAuth } = require("../middlewares/is-auth");
 
 const router = require("express").Router();
 //#endregion
