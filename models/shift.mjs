@@ -1,4 +1,4 @@
-const { Schema, model } = require("mongoose");
+import { Schema, model } from "mongoose";
 
 const shiftSchema = new Schema(
     {
@@ -28,4 +28,4 @@ const shiftSchema = new Schema(
     { timestamps: true }
 );
 
-module.exports = model("Shift", shiftSchema);
+export const shiftModel = model("Shift", shiftSchema);

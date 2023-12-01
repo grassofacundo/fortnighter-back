@@ -1,18 +1,18 @@
 //#region Dependency list
-const { validationResult } = require("express-validator");
-const { setError } = require("../../utils/error-setter");
-const { hash } = require("bcryptjs");
-const { body } = require("express-validator");
-const userModel = require("../../models/user");
+import { validationResult } from "express-validator";
+import { setError } from "../../utils/error-setter.mjs";
+import bcryptjs from "bcryptjs";
+import { body } from "express-validator";
+import { userModel } from "../../models/user.mjs";
 //#endregion
 
-exports.signup = async (req, res, next) => {
+export async function signup(req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) setError("Validation failed", 422, errors.array());
 
     const { email, password } = req.body;
     try {
-        const hashedPassword = await hash(password, 12);
+        const hashedPassword = await bcryptjs.hash(password, 12);
         const user = new userModel({
             email,
             password: hashedPassword,
@@ -25,9 +25,9 @@ exports.signup = async (req, res, next) => {
     } catch (error) {
         next(error);
     }
-};
+}
 
-exports.validSignUp = [
+export const validSignUp = [
     body("email")
         .isEmail()
         .withMessage("Enter a valid Email address")

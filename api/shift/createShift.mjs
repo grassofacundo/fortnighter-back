@@ -1,12 +1,12 @@
 //#region Dependency list
-const { body, validationResult } = require("express-validator");
-const { setError } = require("../../utils/error-setter");
-const userModel = require("../../models/user");
-const { getId } = require("../../utils/tools");
-const shiftModel = require("../../models/shift");
+import { body, validationResult } from "express-validator";
+import { setError } from "../../utils/error-setter.mjs";
+import { userModel } from "../../models/user.mjs";
+import { getId } from "../../utils/tools.mjs";
+import { shiftModel } from "../../models/shift.mjs";
 //#endregion
 
-exports.createShift = async (req, res, next) => {
+export async function createShift(req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) setError("Validation failed", 422, errors.array());
 
@@ -29,6 +29,6 @@ exports.createShift = async (req, res, next) => {
     } catch (error) {
         next(error);
     }
-};
+}
 
-exports.validCreateShift = [body("startTime").trim().not().isEmpty()];
+export const validCreateShift = [body("startTime").trim().not().isEmpty()];

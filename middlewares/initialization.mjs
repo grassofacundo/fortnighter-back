@@ -1,11 +1,11 @@
-const cors = require("cors");
-const multer = require("multer");
-const { v4: uuidv4 } = require("uuid");
+import cors from "cors";
+import multer from "multer";
+import { v4 as uuidv4 } from "uuid";
 
 const corsOptions = {
     allowedHeaders: ["Content-Type", "Authorization"],
 };
-exports.corsConfig = cors(corsOptions);
+export const corsConfig = cors(corsOptions);
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -22,4 +22,4 @@ const fileFilter = (req, file, cb) => {
     cb(null, false);
 };
 
-exports.multerConfig = multer({ storage, fileFilter }).single("image");
+export const multerConfig = multer({ storage, fileFilter }).single("image");

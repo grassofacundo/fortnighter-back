@@ -1,4 +1,4 @@
-const { Schema, model } = require("mongoose");
+import { Schema, model } from "mongoose";
 
 const jobSchema = new Schema(
     {
@@ -39,11 +39,4 @@ const jobSchema = new Schema(
     { timestamps: true }
 );
 
-module.exports = model("Job", jobSchema);
-
-/*
-This could grow
-company name
-address
-I don't know, some other info
-*/
+export const jobModel = model("Job", jobSchema);

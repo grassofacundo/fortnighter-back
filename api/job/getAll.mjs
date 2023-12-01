@@ -1,11 +1,10 @@
 //#region Dependency list
-const userModel = require("../../models/user");
-const jobModel = require("../../models/job");
-const { setError } = require("../../utils/error-setter");
-const { getId } = require("../../utils/tools");
+import { userModel } from "../../models/user.mjs";
+import { setError } from "../../utils/error-setter.mjs";
+import { getId } from "../../utils/tools.mjs";
 //#endregion
 
-exports.getAllJobs = async (req, res, next) => {
+export async function getAllJobs(req, res, next) {
     try {
         const user = await userModel.findById(req.userId);
         if (!user) setError("User not authorized", 401);
@@ -29,4 +28,4 @@ exports.getAllJobs = async (req, res, next) => {
     } catch (error) {
         next(error);
     }
-};
+}

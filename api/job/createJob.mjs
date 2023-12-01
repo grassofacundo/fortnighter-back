@@ -1,12 +1,12 @@
 //#region Dependency list
-const { body, validationResult } = require("express-validator");
-const { setError } = require("../../utils/error-setter");
-const jobModel = require("../../models/job");
-const userModel = require("../../models/user");
-const { getId } = require("../../utils/tools");
+import { body, validationResult } from "express-validator";
+import { setError } from "../../utils/error-setter.mjs";
+import { jobModel } from "../../models/job.mjs";
+import { userModel } from "../../models/user.mjs";
+import { getId } from "../../utils/tools.mjs";
 //#endregion
 
-exports.createJob = async (req, res, next) => {
+export async function createJob(req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) setError("Validation failed", 422, errors.array());
 
@@ -48,6 +48,6 @@ exports.createJob = async (req, res, next) => {
     } catch (error) {
         next(error);
     }
-};
+}
 
-exports.validCreateJob = [body("name").trim().not().isEmpty()];
+export const validCreateJob = [body("name").trim().not().isEmpty()];
