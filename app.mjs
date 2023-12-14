@@ -4,6 +4,7 @@ import "dotenv/config.js";
 import bodyParser from "body-parser";
 import { connect } from "mongoose";
 import { router as jobRouter } from "./routes/job.mjs";
+import { router as paymentRouter } from "./routes/payment.mjs";
 import { router as authRouter } from "./routes/auth.mjs";
 import { router as shiftRouter } from "./routes/shift.mjs";
 import { corsConfig } from "./middlewares/initialization.mjs";
@@ -35,6 +36,7 @@ app.use(new RegExp("^((?!/auth).)*$"), isAuth); //Match every path except for /a
  */
 app.use("/auth", authRouter);
 app.use("/job", jobRouter);
+app.use("/payment", paymentRouter);
 app.use("/shift", shiftRouter);
 /*
  *

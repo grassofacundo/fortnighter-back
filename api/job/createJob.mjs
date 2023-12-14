@@ -13,8 +13,8 @@ export async function createJob(req, res, next) {
     const {
         name,
         hourPrice,
-        cycleEnd,
-        isFortnightly,
+        paymentLapse,
+        nextPaymentDate,
         companyName,
         description,
         address,
@@ -24,13 +24,13 @@ export async function createJob(req, res, next) {
         const user = await userModel.findById(req.userId);
         const newJob = new jobModel({
             name,
-            user,
             hourPrice,
-            cycleEnd,
-            isFortnightly,
+            paymentLapse,
+            nextPaymentDate,
             companyName,
             description,
             address,
+            user,
         });
         const savedJob = await newJob.save();
         user.jobs.push(savedJob._id);
@@ -39,8 +39,8 @@ export async function createJob(req, res, next) {
             id: getId(savedJob),
             name,
             hourPrice,
-            cycleEnd,
-            isFortnightly,
+            paymentLapse,
+            nextPaymentDate,
             companyName,
             description,
             address,

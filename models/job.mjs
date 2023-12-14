@@ -10,12 +10,12 @@ const jobSchema = new Schema(
             type: Number,
             required: true,
         },
-        cycleEnd: {
-            type: Date,
+        paymentLapse: {
+            type: Number,
             required: true,
         },
-        isFortnightly: {
-            type: Boolean,
+        nextPaymentDate: {
+            type: Date,
             required: true,
         },
         companyName: {

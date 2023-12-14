@@ -22,16 +22,14 @@ export async function updateJob(req, res, next) {
 
     try {
         const storedJob = await jobModel.findById(id);
-        storedJob = {
-            name,
-            hourPrice,
-            cycleEnd,
-            isFortnightly,
-            companyName,
-            description,
-            address,
-        };
-        await storedJob.save();
+        (storedJob.name = name),
+            (storedJob.hourPrice = hourPrice),
+            (storedJob.cycleEnd = new Date(cycleEnd)),
+            (storedJob.isFortnightly = isFortnightly),
+            (storedJob.companyName = companyName),
+            (storedJob.description = description),
+            (storedJob.address = address),
+            await storedJob.save();
 
         res.status(201).json({
             id: getId(storedJob),
