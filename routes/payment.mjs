@@ -1,11 +1,8 @@
 //#region Dependency list
 import { Router } from "express";
-import {
-    createPayment,
-    validCreatePayment,
-} from "../api/payment/createPayment.mjs";
 import { getAllPayments } from "../api/payment/getAll.mjs";
 import { getLastPayment } from "../api/payment/getLast.mjs";
+import { createPayment, validCreatePayment } from "../api/payment/create.mjs";
 //#endregion
 
 export const router = Router();
