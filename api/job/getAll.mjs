@@ -16,8 +16,9 @@ export async function getAllJobs(req, res, next) {
                     id: getId(job),
                     name: job.name,
                     hourPrice: job.hourPrice,
-                    cycleEnd: job.cycleEnd,
-                    isFortnightly: job.isFortnightly,
+                    paymentLapse: job.paymentLapse,
+                    nextPaymentDate: job.nextPaymentDate,
+                    companyName: job.companyName,
                     description: job.description,
                     address: job.address,
                 });
