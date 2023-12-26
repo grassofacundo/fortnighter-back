@@ -7,8 +7,168 @@ const jobSchema = new Schema(
             required: true,
         },
         hourPrice: {
-            type: Number,
-            required: true,
+            regular: {
+                normal: {
+                    type: Number,
+                    required: true,
+                },
+                overtime: {
+                    type: Number,
+                    required: true,
+                },
+                overwork: {
+                    type: Number,
+                    required: true,
+                },
+            },
+            saturday: {
+                normal: {
+                    type: Number,
+                    required: true,
+                },
+                overtime: {
+                    type: Number,
+                    required: true,
+                },
+                overwork: {
+                    type: Number,
+                    required: true,
+                },
+            },
+            sunday: {
+                normal: {
+                    type: Number,
+                    required: true,
+                },
+                overtime: {
+                    type: Number,
+                    required: true,
+                },
+                overwork: {
+                    type: Number,
+                    required: true,
+                },
+            },
+            holiday: {
+                normal: {
+                    type: Number,
+                    required: true,
+                },
+                overtime: {
+                    type: Number,
+                    required: true,
+                },
+                overwork: {
+                    type: Number,
+                    required: true,
+                },
+            },
+        },
+        workdayTimes: {
+            regular: {
+                normal: {
+                    start: {
+                        type: Number,
+                        required: true,
+                    },
+                    end: {
+                        type: Number,
+                        required: true,
+                    },
+                },
+                overtime: {
+                    start: {
+                        type: Number,
+                        required: true,
+                    },
+                    end: {
+                        type: Number,
+                        required: true,
+                    },
+                },
+                length: {
+                    type: Number,
+                    required: true,
+                },
+            },
+            saturday: {
+                normal: {
+                    start: {
+                        type: Number,
+                        required: true,
+                    },
+                    end: {
+                        type: Number,
+                        required: true,
+                    },
+                },
+                overtime: {
+                    start: {
+                        type: Number,
+                        required: true,
+                    },
+                    end: {
+                        type: Number,
+                        required: true,
+                    },
+                },
+                length: {
+                    type: Number,
+                    required: true,
+                },
+            },
+            sunday: {
+                normal: {
+                    start: {
+                        type: Number,
+                        required: true,
+                    },
+                    end: {
+                        type: Number,
+                        required: true,
+                    },
+                },
+                overtime: {
+                    start: {
+                        type: Number,
+                        required: true,
+                    },
+                    end: {
+                        type: Number,
+                        required: true,
+                    },
+                },
+                length: {
+                    type: Number,
+                    required: true,
+                },
+            },
+            holiday: {
+                normal: {
+                    start: {
+                        type: Number,
+                        required: true,
+                    },
+                    end: {
+                        type: Number,
+                        required: true,
+                    },
+                },
+                overtime: {
+                    start: {
+                        type: Number,
+                        required: true,
+                    },
+                    end: {
+                        type: Number,
+                        required: true,
+                    },
+                },
+                length: {
+                    type: Number,
+                    required: true,
+                },
+            },
         },
         paymentLapse: {
             type: Number,
