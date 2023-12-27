@@ -14,53 +14,53 @@ const jobSchema = new Schema(
                 },
                 overtime: {
                     type: Number,
-                    required: true,
+                    required: false,
                 },
                 overwork: {
                     type: Number,
-                    required: true,
+                    required: false,
                 },
             },
             saturday: {
                 normal: {
                     type: Number,
-                    required: true,
+                    required: false,
                 },
                 overtime: {
                     type: Number,
-                    required: true,
+                    required: false,
                 },
                 overwork: {
                     type: Number,
-                    required: true,
+                    required: false,
                 },
             },
             sunday: {
                 normal: {
                     type: Number,
-                    required: true,
+                    required: false,
                 },
                 overtime: {
                     type: Number,
-                    required: true,
+                    required: false,
                 },
                 overwork: {
                     type: Number,
-                    required: true,
+                    required: false,
                 },
             },
             holiday: {
                 normal: {
                     type: Number,
-                    required: true,
+                    required: false,
                 },
                 overtime: {
                     type: Number,
-                    required: true,
+                    required: false,
                 },
                 overwork: {
                     type: Number,
-                    required: true,
+                    required: false,
                 },
             },
         },
@@ -69,104 +69,104 @@ const jobSchema = new Schema(
                 normal: {
                     start: {
                         type: Number,
-                        required: true,
+                        required: false,
                     },
                     end: {
                         type: Number,
-                        required: true,
+                        required: false,
                     },
                 },
                 overtime: {
                     start: {
                         type: Number,
-                        required: true,
+                        required: false,
                     },
                     end: {
                         type: Number,
-                        required: true,
+                        required: false,
                     },
                 },
                 length: {
                     type: Number,
-                    required: true,
+                    required: false,
                 },
             },
             saturday: {
                 normal: {
                     start: {
                         type: Number,
-                        required: true,
+                        required: false,
                     },
                     end: {
                         type: Number,
-                        required: true,
+                        required: false,
                     },
                 },
                 overtime: {
                     start: {
                         type: Number,
-                        required: true,
+                        required: false,
                     },
                     end: {
                         type: Number,
-                        required: true,
+                        required: false,
                     },
                 },
                 length: {
                     type: Number,
-                    required: true,
+                    required: false,
                 },
             },
             sunday: {
                 normal: {
                     start: {
                         type: Number,
-                        required: true,
+                        required: false,
                     },
                     end: {
                         type: Number,
-                        required: true,
+                        required: false,
                     },
                 },
                 overtime: {
                     start: {
                         type: Number,
-                        required: true,
+                        required: false,
                     },
                     end: {
                         type: Number,
-                        required: true,
+                        required: false,
                     },
                 },
                 length: {
                     type: Number,
-                    required: true,
+                    required: false,
                 },
             },
             holiday: {
                 normal: {
                     start: {
                         type: Number,
-                        required: true,
+                        required: false,
                     },
                     end: {
                         type: Number,
-                        required: true,
+                        required: false,
                     },
                 },
                 overtime: {
                     start: {
                         type: Number,
-                        required: true,
+                        required: false,
                     },
                     end: {
                         type: Number,
-                        required: true,
+                        required: false,
                     },
                 },
                 length: {
                     type: Number,
-                    required: true,
+                    required: false,
                 },
             },
         },
@@ -182,14 +182,6 @@ const jobSchema = new Schema(
             type: String,
             required: false,
         },
-        description: {
-            type: String,
-            required: false,
-        },
-        address: {
-            type: String,
-            required: false,
-        },
         user: {
             type: Schema.Types.ObjectId,
             ref: "User",
@@ -200,3 +192,8 @@ const jobSchema = new Schema(
 );
 
 export const jobModel = model("Job", jobSchema);
+
+/*
+My regular workday during [week, saturday, sunday, holiday] is from [hour1] to [hour2] and the price is [price1]. Then, from [hour2] to [hour1], the overtime price is [price2].
+My regular workday is [hoursAmount] length, after those hours, the overwork price is [price3]
+*/

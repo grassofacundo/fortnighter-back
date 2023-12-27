@@ -13,6 +13,7 @@ export async function createJob(req, res, next) {
     const {
         name,
         hourPrice,
+        workdayTimes,
         paymentLapse,
         nextPaymentDate,
         companyName,
@@ -20,11 +21,13 @@ export async function createJob(req, res, next) {
         address,
     } = req.body;
 
+    const hourPriceObj = { regular: { normal: hourPrice } };
     try {
         const user = await userModel.findById(req.userId);
         const newJob = new jobModel({
             name,
-            hourPrice,
+            hourPrice: hourPriceObj,
+            workdayTimes,
             paymentLapse,
             nextPaymentDate,
             companyName,
@@ -38,7 +41,8 @@ export async function createJob(req, res, next) {
         res.status(201).json({
             id: getId(savedJob),
             name,
-            hourPrice,
+            hourPriceObj,
+            workdayTimes,
             paymentLapse,
             nextPaymentDate,
             companyName,
