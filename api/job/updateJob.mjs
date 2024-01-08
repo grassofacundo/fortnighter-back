@@ -13,30 +13,31 @@ export async function updateJob(req, res, next) {
         id,
         name,
         hourPrice,
-        cycleEnd,
-        isFortnightly,
+        workdayTimes,
+        nextPaymentDate,
+        paymentLapse,
         companyName,
         description,
         address,
     } = req.body;
 
     try {
-        const storedJob = await jobModel.findById(id);
-        (storedJob.name = name),
-            (storedJob.hourPrice = hourPrice),
-            (storedJob.cycleEnd = new Date(cycleEnd)),
-            (storedJob.isFortnightly = isFortnightly),
-            (storedJob.companyName = companyName),
-            (storedJob.description = description),
-            (storedJob.address = address),
-            await storedJob.save();
+        const j = await jobModel.findById(id);
+        if (j.name !== name) j.name = name;
+        if (j.hourPrice !== hourPrice) j.hourPrice = hourPrice;
+        if (j.paymentLapse !== paymentLapse) j.paymentLapse = paymentLapse;
+        const payment = new Date(nextPaymentDate);
+        if (j.nextPaymentDate !== payment) j.nextPaymentDate = payment;
+        if (j.companyName !== companyName) j.companyName = companyName;
+        await j.save();
 
         res.status(201).json({
-            id: getId(storedJob),
+            id: getId(j),
             name,
             hourPrice,
-            cycleEnd,
-            isFortnightly,
+            workdayTimes,
+            nextPaymentDate,
+            paymentLapse,
             companyName,
             description,
             address,

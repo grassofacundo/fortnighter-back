@@ -66,51 +66,43 @@ const jobSchema = new Schema(
         },
         workdayTimes: {
             regular: {
-                normal: {
-                    start: {
-                        type: Number,
-                        required: false,
-                    },
-                    end: {
-                        type: Number,
-                        required: false,
-                    },
+                startTime: {
+                    type: String,
+                    required: true,
                 },
-                overtime: {
-                    start: {
-                        type: Number,
-                        required: false,
-                    },
-                    end: {
-                        type: Number,
-                        required: false,
-                    },
+                startMeridian: {
+                    type: String,
+                    required: true,
+                },
+                endTime: {
+                    type: String,
+                    required: true,
+                },
+                endMeridian: {
+                    type: String,
+                    required: true,
                 },
                 length: {
                     type: Number,
-                    required: false,
+                    required: true,
                 },
             },
             saturday: {
-                normal: {
-                    start: {
-                        type: Number,
-                        required: false,
-                    },
-                    end: {
-                        type: Number,
-                        required: false,
-                    },
+                startTime: {
+                    type: String,
+                    required: false,
                 },
-                overtime: {
-                    start: {
-                        type: Number,
-                        required: false,
-                    },
-                    end: {
-                        type: Number,
-                        required: false,
-                    },
+                startMeridian: {
+                    type: String,
+                    required: false,
+                },
+                endTime: {
+                    type: String,
+                    required: false,
+                },
+                endMeridian: {
+                    type: String,
+                    required: false,
                 },
                 length: {
                     type: Number,
@@ -118,25 +110,21 @@ const jobSchema = new Schema(
                 },
             },
             sunday: {
-                normal: {
-                    start: {
-                        type: Number,
-                        required: false,
-                    },
-                    end: {
-                        type: Number,
-                        required: false,
-                    },
+                startTime: {
+                    type: String,
+                    required: false,
                 },
-                overtime: {
-                    start: {
-                        type: Number,
-                        required: false,
-                    },
-                    end: {
-                        type: Number,
-                        required: false,
-                    },
+                startMeridian: {
+                    type: String,
+                    required: false,
+                },
+                endTime: {
+                    type: String,
+                    required: false,
+                },
+                endMeridian: {
+                    type: String,
+                    required: false,
                 },
                 length: {
                     type: Number,
@@ -144,25 +132,21 @@ const jobSchema = new Schema(
                 },
             },
             holiday: {
-                normal: {
-                    start: {
-                        type: Number,
-                        required: false,
-                    },
-                    end: {
-                        type: Number,
-                        required: false,
-                    },
+                startTime: {
+                    type: String,
+                    required: false,
                 },
-                overtime: {
-                    start: {
-                        type: Number,
-                        required: false,
-                    },
-                    end: {
-                        type: Number,
-                        required: false,
-                    },
+                startMeridian: {
+                    type: String,
+                    required: false,
+                },
+                endTime: {
+                    type: String,
+                    required: false,
+                },
+                endMeridian: {
+                    type: String,
+                    required: false,
                 },
                 length: {
                     type: Number,

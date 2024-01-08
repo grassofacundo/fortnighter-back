@@ -17,38 +17,23 @@ export async function createJob(req, res, next) {
         paymentLapse,
         nextPaymentDate,
         companyName,
-        description,
-        address,
     } = req.body;
 
-    const hourPriceObj = { regular: { normal: hourPrice } };
     try {
         const user = await userModel.findById(req.userId);
         const newJob = new jobModel({
             name,
-            hourPrice: hourPriceObj,
+            hourPrice,
             workdayTimes,
             paymentLapse,
             nextPaymentDate,
             companyName,
-            description,
-            address,
             user,
         });
         const savedJob = await newJob.save();
         user.jobs.push(savedJob._id);
         await user.save();
-        res.status(201).json({
-            id: getId(savedJob),
-            name,
-            hourPriceObj,
-            workdayTimes,
-            paymentLapse,
-            nextPaymentDate,
-            companyName,
-            description,
-            address,
-        });
+        res.status(201).json(getId(savedJob));
     } catch (error) {
         next(error);
     }
