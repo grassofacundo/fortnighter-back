@@ -25,4 +25,4 @@ export async function updateShift(req, res, next) {
     }
 }
 
-export const validUpdateShift = [body("startTime").trim().not().isEmpty()];
+export const validUpdateShift = [];
