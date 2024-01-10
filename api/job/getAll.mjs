@@ -16,11 +16,10 @@ export async function getAllJobs(req, res, next) {
                     id: getId(job),
                     name: job.name,
                     hourPrice: job.hourPrice,
+                    workdayTimes: job.workdayTimes,
                     paymentLapse: job.paymentLapse,
                     nextPaymentDate: job.nextPaymentDate,
                     companyName: job.companyName,
-                    description: job.description,
-                    address: job.address,
                 });
             });
         }

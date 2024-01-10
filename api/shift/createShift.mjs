@@ -10,22 +10,19 @@ export async function createShift(req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) setError("Validation failed", 422, errors.array());
 
-    const { jobPositionId, isHoliday, startTime, endTime } = req.body;
+    const { jobId, isHoliday, startTime, endTime } = req.body;
 
     try {
         const user = await userModel.findById(req.userId);
         const newShift = new shiftModel({
             user,
-            job: jobPositionId,
+            job: jobId,
             startTime,
             endTime,
             isHoliday,
         });
         const savedShift = await newShift.save();
-        res.status(201).json({
-            id: getId(savedShift),
-            ...newShift,
-        });
+        res.status(201).json(getId(savedShift));
     } catch (error) {
         next(error);
     }

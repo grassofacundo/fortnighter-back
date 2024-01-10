@@ -20,6 +20,7 @@ export async function getShifts(req, res, next) {
 
         const shiftList = shifts.map((shift) => {
             return {
+                id: getId(shift),
                 jobPositionId: getId(shift.job),
                 isHoliday: shift.isHoliday,
                 startTime: shift.startTime,

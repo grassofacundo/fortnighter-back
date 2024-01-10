@@ -17,8 +17,6 @@ export async function updateJob(req, res, next) {
         nextPaymentDate,
         paymentLapse,
         companyName,
-        description,
-        address,
     } = req.body;
 
     try {
@@ -39,8 +37,6 @@ export async function updateJob(req, res, next) {
             nextPaymentDate,
             paymentLapse,
             companyName,
-            description,
-            address,
         });
     } catch (error) {
         next(error);
