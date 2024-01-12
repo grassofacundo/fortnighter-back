@@ -24,6 +24,136 @@ const shiftSchema = new Schema(
             type: Boolean,
             required: true,
         },
+        forcedPaymentInfo: {
+            week: {
+                regular: {
+                    price: {
+                        type: Number,
+                        required: false,
+                    },
+                    hours: {
+                        type: Number,
+                        required: false,
+                    },
+                },
+                overtime: {
+                    price: {
+                        type: Number,
+                        required: false,
+                    },
+                    hours: {
+                        type: Number,
+                        required: false,
+                    },
+                },
+                overwork: {
+                    price: {
+                        type: Number,
+                        required: false,
+                    },
+                    hours: {
+                        type: Number,
+                        required: false,
+                    },
+                },
+            },
+            saturday: {
+                regular: {
+                    price: {
+                        type: Number,
+                        required: false,
+                    },
+                    hours: {
+                        type: Number,
+                        required: false,
+                    },
+                },
+                overtime: {
+                    price: {
+                        type: Number,
+                        required: false,
+                    },
+                    hours: {
+                        type: Number,
+                        required: false,
+                    },
+                },
+                overwork: {
+                    price: {
+                        type: Number,
+                        required: false,
+                    },
+                    hours: {
+                        type: Number,
+                        required: false,
+                    },
+                },
+            },
+            sunday: {
+                regular: {
+                    price: {
+                        type: Number,
+                        required: false,
+                    },
+                    hours: {
+                        type: Number,
+                        required: false,
+                    },
+                },
+                overtime: {
+                    price: {
+                        type: Number,
+                        required: false,
+                    },
+                    hours: {
+                        type: Number,
+                        required: false,
+                    },
+                },
+                overwork: {
+                    price: {
+                        type: Number,
+                        required: false,
+                    },
+                    hours: {
+                        type: Number,
+                        required: false,
+                    },
+                },
+            },
+            holiday: {
+                regular: {
+                    price: {
+                        type: Number,
+                        required: false,
+                    },
+                    hours: {
+                        type: Number,
+                        required: false,
+                    },
+                },
+                overtime: {
+                    price: {
+                        type: Number,
+                        required: false,
+                    },
+                    hours: {
+                        type: Number,
+                        required: false,
+                    },
+                },
+                overwork: {
+                    price: {
+                        type: Number,
+                        required: false,
+                    },
+                    hours: {
+                        type: Number,
+                        required: false,
+                    },
+                },
+            },
+        },
     },
     { timestamps: true }
 );

@@ -7,8 +7,8 @@ const jobSchema = new Schema(
             required: true,
         },
         hourPrice: {
-            regular: {
-                normal: {
+            week: {
+                regular: {
                     type: Number,
                     required: true,
                 },
@@ -22,7 +22,7 @@ const jobSchema = new Schema(
                 },
             },
             saturday: {
-                normal: {
+                regular: {
                     type: Number,
                     required: false,
                 },
@@ -36,7 +36,7 @@ const jobSchema = new Schema(
                 },
             },
             sunday: {
-                normal: {
+                regular: {
                     type: Number,
                     required: false,
                 },
@@ -50,7 +50,7 @@ const jobSchema = new Schema(
                 },
             },
             holiday: {
-                normal: {
+                regular: {
                     type: Number,
                     required: false,
                 },
