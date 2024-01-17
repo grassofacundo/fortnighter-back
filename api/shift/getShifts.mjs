@@ -25,6 +25,7 @@ export async function getShifts(req, res, next) {
                 isHoliday: shift.isHoliday,
                 startTime: shift.startTime,
                 endTime: shift.endTime,
+                forcedTotal: shift.forcedTotal,
             };
         });
 
