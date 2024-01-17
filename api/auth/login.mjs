@@ -1,7 +1,7 @@
 //#region Dependency list
 import bcryptjs from "bcryptjs";
 import { validationResult, body } from "express-validator";
-import jsonwebtoken from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import { setError } from "../../utils/error-setter.mjs";
 import { userModel } from "../../models/user.mjs";
 //#endregion
@@ -18,23 +18,29 @@ export async function login(req, res, next) {
         const passwordsMatch = await bcryptjs.compare(password, user.password);
         if (!passwordsMatch) setError("Validation failed", 422);
 
-        const token = jsonwebtoken.sign(
-            {
-                email: user.email,
-                userId: user._id.toString(),
-            },
-            process.env.JSW_SECRET,
-            { expiresIn: "1h" }
-        );
+        const userToken = {
+            email: user.email,
+            userId: user._id.toString(),
+        };
+        const secret = process.env.JSW_SECRET;
 
-        res.status(200).json({
-            token,
-            user: {
-                name: user.name,
-                email: user.email,
-                jobs: user.jobs,
-            },
-        });
+        const accessToken = jwt.sign(userToken, secret, { expiresIn: "1h" });
+        const refreshToken = jwt.sign(userToken, secret, { expiresIn: "1d" });
+
+        res.status(200)
+            .cookie("refreshToken", refreshToken, {
+                httpOnly: true,
+                sameSite: "strict",
+            })
+            .header("Authorization", accessToken)
+            .json({
+                accessToken,
+                user: {
+                    name: user.name,
+                    email: user.email,
+                    jobs: user.jobs,
+                },
+            });
     } catch (error) {
         next(error);
     }
