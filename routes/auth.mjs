@@ -7,3 +7,4 @@ import { login, validLogin } from "../api/auth/login.mjs";
 export const router = Router();
 router.post("/signup", validSignUp, signup);
 router.post("/login", validLogin, login);
+router.delete("/logout", validLogin, logout);
