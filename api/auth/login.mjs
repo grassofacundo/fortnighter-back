@@ -22,29 +22,34 @@ export async function login(req, res, next) {
         const passwordsMatch = await bcryptjs.compare(password, user.password);
         if (!passwordsMatch) setError("Validation failed", 422);
 
-        const session = new sessionModel(email, getId(user._id), true);
+        const session = new sessionModel({
+            email,
+            userId: getId(user._id),
+            isValid: true,
+        });
         const savedSession = await session.save();
         const sessionId = getId(savedSession._id);
 
         const payload = {
             email: user.email,
-            userId: user._id.toString(),
+            userId: getId(user._id),
             sessionId,
         };
 
-        const accessToken = signJWT(payload, secret, "1h");
+        const accessToken = signJWT(payload, "1h");
         const refreshToken = signJWT({ sessionId }, "1y");
 
         res.status(200)
-            .cookie("cc", accessToken, {
-                httpOnly: true,
+            .cookie("accessToken", accessToken, {
+                SameSite: "None",
                 maxAge: 60000 * 60,
+                secure: true,
             })
-            .cookie("RefreshToken", refreshToken, {
-                httpOnly: true,
-                sameSite: "strict",
+            .cookie("refreshToken", refreshToken, {
+                SameSite: "None",
+                maxAge: 31536000,
+                secure: true,
             })
-
             .json({
                 user: {
                     name: user.name,

@@ -10,6 +10,7 @@ import { router as shiftRouter } from "./routes/shift.mjs";
 import { corsConfig } from "./middlewares/initialization.mjs";
 import { errorHandler } from "./middlewares/error.mjs";
 import { isAuth } from "./middlewares/is-auth.mjs";
+import cookieParser from "cookie-parser";
 //#endregion
 
 /*
@@ -19,6 +20,7 @@ import { isAuth } from "./middlewares/is-auth.mjs";
  */
 const app = express();
 app.use("*", corsConfig);
+app.use(cookieParser());
 //app.use(multerConfig);
 app.use(bodyParser.json());
 //app.use("/images", express.static(path.join(__dirname, "images")));

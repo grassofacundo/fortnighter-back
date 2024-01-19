@@ -5,13 +5,19 @@ import { sessionModel } from "../../models/session.mjs";
 export async function logout(req, res, next) {
     res.cookie("accessToken", "", {
         maxAge: 0,
-        httpOnly: true,
+        SameSite: "None",
+        secure: true,
     });
 
     res.cookie("refreshToken", "", {
         maxAge: 0,
-        httpOnly: true,
+        SameSite: "None",
+        secure: true,
     });
-    const sessionId = req.user.sessionId;
-    const session = await sessionModel.deleteOne({ _id: sessionId });
+
+    const { sessionId } = req.body;
+
+    if (sessionId) await sessionModel.deleteOne({ _id: sessionId });
+
+    res.send();
 }

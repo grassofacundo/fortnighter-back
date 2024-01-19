@@ -6,7 +6,7 @@ import { getId } from "../../utils/tools.mjs";
 
 export async function getAllJobs(req, res, next) {
     try {
-        const user = await userModel.findById(req.userId);
+        const user = await userModel.findById(req.user.userId);
         if (!user) setError("User not authorized", 401);
         const userWithJob = await user.populate({ path: "jobs" });
         const jobList = [];
