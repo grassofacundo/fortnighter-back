@@ -7,14 +7,12 @@ import { setError } from "../../utils/error-setter.mjs";
 
 export async function getLastPayment(req, res, next) {
     try {
-        const user = await userModel.findById(req.userId);
-        if (!user) setError("User not authorized", 401);
         const { jobId } = req.query;
         if (!jobId) setError("Missing required param", 422, errors.array());
 
         const payment = await paymentModel
             .findOne({
-                user: req.userId,
+                user: req.user.userId,
                 job: jobId,
             })
             .sort({ endDate: 1 });

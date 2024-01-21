@@ -13,7 +13,7 @@ export async function getShifts(req, res, next) {
         const start = new Date(`${startDate}T23:59:59`);
         const end = new Date(`${endDate}T23:59:59`);
         const shifts = await shiftModel.find({
-            user: req.userId,
+            user: req.user.userId,
             job: jobPositionId,
             startTime: { $gte: start, $lte: end },
         });
