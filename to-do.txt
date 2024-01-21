@@ -1,1 +1,2 @@
-Store shift in database
+Auth:
+I think a good idea to clean up the unused sessions in the DB would be to delete all sessions with more than a year of date creation. Because their tokens would be expired by then, they only last a year, after that, they will need to log in again and create a new session.
