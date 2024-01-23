@@ -23,7 +23,7 @@ export async function updateJob(req, res, next) {
         const j = await jobModel.findById(id);
         if (j.name !== name) j.name = name;
         if (j.hourPrice !== hourPrice) j.hourPrice = hourPrice;
-        if (j.workdayTimes !== hourPrice) j.workdayTimes = workdayTimes;
+        if (j.workdayTimes !== workdayTimes) j.workdayTimes = workdayTimes;
         if (j.paymentLapse !== paymentLapse) j.paymentLapse = paymentLapse;
         const payment = new Date(nextPaymentDate);
         if (j.nextPaymentDate !== payment) j.nextPaymentDate = payment;
