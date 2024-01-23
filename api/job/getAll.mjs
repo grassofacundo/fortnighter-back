@@ -1,6 +1,7 @@
 //#region Dependency list
 import { userModel } from "../../models/user.mjs";
 import { setError } from "../../utils/error-setter.mjs";
+import { removeEmptyProperties } from "../../utils/objectCleaner.mjs";
 import { getId } from "../../utils/tools.mjs";
 //#endregion
 
@@ -12,11 +13,15 @@ export async function getAllJobs(req, res, next) {
         const jobList = [];
         if (userWithJob?.jobs.length > 0) {
             userWithJob.jobs.forEach((job) => {
+                const cleanedHourPrice = removeEmptyProperties(job.hourPrice);
+                const cleanedWorkdayTimes = removeEmptyProperties(
+                    job.workdayTimes
+                );
                 jobList.push({
                     id: getId(job),
                     name: job.name,
-                    hourPrice: job.hourPrice,
-                    workdayTimes: job.workdayTimes,
+                    hourPrice: cleanedHourPrice,
+                    workdayTimes: cleanedWorkdayTimes,
                     paymentLapse: job.paymentLapse,
                     nextPaymentDate: job.nextPaymentDate,
                     companyName: job.companyName,
