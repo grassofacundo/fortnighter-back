@@ -6,28 +6,19 @@ const modifierSchema = new Schema(
             type: String,
             required: true,
         },
-        periodicTimeCondition: [
+        byShift: [
             {
                 forEvery: {
-                    type: String, //"shift", "day", "month"
-                    required: true,
-                },
-                amount: {
-                    type: Boolean,
-                    required: true,
+                    type: Number, //For every N worked shift(s)
+                    required: false,
                 },
             },
         ],
-        specificTimeCondition: [
+        byPayment: [
             {
-                targetType: {
-                    type: String, //"day", "month", "shift"
-                    required: true,
-                },
-                target: {
-                    type: String, //"monday", "tuesday", "april"
-                    required: true,
-                },
+                type: Schema.Types.ObjectId,
+                ref: "Payment",
+                required: false,
             },
         ],
         amountCondition: [
