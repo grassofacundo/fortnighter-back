@@ -30,7 +30,7 @@ export async function updateJob(req, res, next) {
         if (j.companyName !== companyName) j.companyName = companyName;
         await j.save();
 
-        res.status(201).send();
+        res.status(201).json({ updateJob: j });
     } catch (error) {
         next(error);
     }
