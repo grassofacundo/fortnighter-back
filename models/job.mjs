@@ -65,7 +65,7 @@ const jobSchema = new Schema(
             },
         },
         workdayTimes: {
-            regular: {
+            week: {
                 startTime: {
                     type: String,
                     required: true,
