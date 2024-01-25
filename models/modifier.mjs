@@ -21,7 +21,7 @@ const modifierSchema = new Schema(
                 required: false,
             },
         ],
-        amountCondition: [
+        byAmount: [
             {
                 moreThan: {
                     type: Boolean,
