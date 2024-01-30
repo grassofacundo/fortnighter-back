@@ -6,37 +6,31 @@ const modifierSchema = new Schema(
             type: String,
             required: true,
         },
-        byShift: [
-            {
-                forEvery: {
-                    type: Number, //For every N worked shift(s)
-                    required: false,
-                },
-            },
-        ],
-        byPayment: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: "Payment",
+        byShift: {
+            forEvery: {
+                type: Number, //For every N worked shift(s)
                 required: false,
             },
-        ],
-        byAmount: [
-            {
-                moreThan: {
-                    type: Boolean,
-                    required: true,
-                },
-                lessThan: {
-                    type: Boolean,
-                    required: true,
-                },
-                amount: {
-                    type: Number,
-                    required: true,
-                },
+        },
+        byPayment: {
+            type: Schema.Types.ObjectId,
+            ref: "Payment",
+            required: false,
+        },
+        byAmount: {
+            moreThan: {
+                type: Boolean,
+                required: false,
             },
-        ],
+            lessThan: {
+                type: Boolean,
+                required: false,
+            },
+            amount: {
+                type: Number,
+                required: false,
+            },
+        },
         amount: {
             increase: {
                 type: Boolean,

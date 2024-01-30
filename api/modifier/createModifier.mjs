@@ -11,24 +11,17 @@ export async function createModifier(req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) setError("Validation failed", 422, errors.array());
 
-    const {
-        name,
-        periodicTimeCondition,
-        specificTimeCondition,
-        amountCondition,
-        amount,
-        jobId,
-    } = req.body;
+    const { name, byShift, byPayment, byAmount, amount, jobId } = req.body;
 
     try {
-        const user = await userModel.findById(req.userId);
+        const user = await userModel.findById(req.user.userId);
         const job = await jobModel.findById(jobId);
 
         const newModifier = new modifierModel({
             name,
-            periodicTimeCondition,
-            specificTimeCondition,
-            amountCondition,
+            byShift,
+            byPayment,
+            byAmount,
             amount,
             user,
             job,
@@ -38,10 +31,11 @@ export async function createModifier(req, res, next) {
         res.status(201).json({
             id: getId(savedModifier),
             name: savedModifier.name,
-            periodicTimeCondition: savedModifier.periodicTimeCondition,
-            specificTimeCondition: savedModifier.specificTimeCondition,
-            amountCondition: savedModifier.amountCondition,
+            byShift: savedModifier.byShift,
+            byPayment: savedModifier.byPayment,
+            byAmount: savedModifier.byAmount,
             amount: savedModifier.amount,
+            jobId,
         });
     } catch (error) {
         next(error);
