@@ -1,5 +1,6 @@
 //#region Dependency list
 import { userModel } from "../../models/user.mjs";
+import { modifierModel } from "../../models/modifier.mjs";
 import { setError } from "../../utils/error-setter.mjs";
 import { removeEmptyProperties } from "../../utils/objectCleaner.mjs";
 import { getId } from "../../utils/tools.mjs";
@@ -12,11 +13,15 @@ export async function getAllJobs(req, res, next) {
         const userWithJob = await user.populate({ path: "jobs" });
         const jobList = [];
         if (userWithJob?.jobs.length > 0) {
-            userWithJob.jobs.forEach((job) => {
+            for (const job of userWithJob.jobs) {
                 const cleanedHourPrice = removeEmptyProperties(job.hourPrice);
                 const cleanedWorkdayTimes = removeEmptyProperties(
                     job.workdayTimes
                 );
+                const modifiers = await modifierModel.find({ user, job });
+                if (modifiers.length > 0) job.modifiers = [];
+                modifiers.forEach((m) => job.modifiers.push(m));
+
                 jobList.push({
                     id: getId(job),
                     name: job.name,
@@ -25,8 +30,9 @@ export async function getAllJobs(req, res, next) {
                     paymentLapse: job.paymentLapse,
                     nextPaymentDate: job.nextPaymentDate,
                     companyName: job.companyName,
+                    modifiers: job.modifiers,
                 });
-            });
+            }
         }
 
         res.status(201).json(jobList);

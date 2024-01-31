@@ -26,6 +26,14 @@ const modifierSchema = new Schema(
                 type: Boolean,
                 required: false,
             },
+            daily: {
+                type: Boolean,
+                required: false,
+            },
+            total: {
+                type: Boolean,
+                required: false,
+            },
             amount: {
                 type: Number,
                 required: false,
