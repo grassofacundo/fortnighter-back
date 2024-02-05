@@ -8,7 +8,7 @@ export async function deleteModifier(req, res, next) {
     try {
         if (modifierId) await modifierModel.deleteOne({ _id: modifierId });
 
-        res.json();
+        res.json({});
     } catch (error) {
         next(error);
     }

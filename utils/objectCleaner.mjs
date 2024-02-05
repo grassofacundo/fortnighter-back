@@ -1,4 +1,6 @@
 export function removeEmptyProperties(object) {
+    if (object == null) return;
+
     const objectKeys = Object.keys(object);
     for (let index = 0; index < objectKeys.length; index++) {
         const item = object[objectKeys[index]];

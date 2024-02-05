@@ -19,5 +19,5 @@ export async function logout(req, res, next) {
 
     if (sessionId) await sessionModel.deleteOne({ _id: sessionId });
 
-    res.json();
+    res.json({});
 }

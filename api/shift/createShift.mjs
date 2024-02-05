@@ -13,7 +13,7 @@ export async function createShift(req, res, next) {
     const { jobId, isHoliday, startTime, endTime } = req.body;
 
     try {
-        const user = await userModel.findById(req.userId);
+        const user = await userModel.findById(req.user.userId);
         const newShift = new shiftModel({
             user,
             job: jobId,

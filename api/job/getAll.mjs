@@ -20,7 +20,17 @@ export async function getAllJobs(req, res, next) {
                 );
                 const modifiers = await modifierModel.find({ user, job });
                 if (modifiers.length > 0) job.modifiers = [];
-                modifiers.forEach((m) => job.modifiers.push(m));
+                modifiers.forEach((m) => {
+                    const newModifier = {
+                        id: getId(m),
+                        name: m.name,
+                        byShift: removeEmptyProperties(m.byShift),
+                        byPayment: removeEmptyProperties(m.byPayment),
+                        byAmount: removeEmptyProperties(m.byAmount),
+                        amount: removeEmptyProperties(m.amount),
+                    };
+                    job.modifiers.push(newModifier);
+                });
 
                 jobList.push({
                     id: getId(job),

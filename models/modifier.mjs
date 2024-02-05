@@ -8,7 +8,7 @@ const modifierSchema = new Schema(
         },
         byShift: {
             forEvery: {
-                type: Number, //For every N worked shift(s)
+                type: Number,
                 required: false,
             },
         },
