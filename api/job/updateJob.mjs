@@ -2,7 +2,6 @@
 import { body, validationResult } from "express-validator";
 import { setError } from "../../utils/error-setter.mjs";
 import { jobModel } from "../../models/job.mjs";
-import { getId } from "../../utils/tools.mjs";
 //#endregion
 
 export async function updateJob(req, res, next) {
@@ -14,8 +13,8 @@ export async function updateJob(req, res, next) {
         name,
         hourPrice,
         workdayTimes,
-        nextPaymentDate,
-        paymentLapse,
+        nextPayment,
+        lastPayment,
         companyName,
     } = req.body;
 
@@ -24,13 +23,12 @@ export async function updateJob(req, res, next) {
         if (j.name !== name) j.name = name;
         if (j.hourPrice !== hourPrice) j.hourPrice = hourPrice;
         if (j.workdayTimes !== workdayTimes) j.workdayTimes = workdayTimes;
-        if (j.paymentLapse !== paymentLapse) j.paymentLapse = paymentLapse;
-        const payment = new Date(nextPaymentDate);
-        if (j.nextPaymentDate !== payment) j.nextPaymentDate = payment;
+        if (j.lastPayment !== lastPayment) j.lastPayment = lastPayment;
+        if (j.nextPayment !== nextPayment) j.nextPayment = nextPayment;
         if (j.companyName !== companyName) j.companyName = companyName;
         await j.save();
 
-        res.status(201).json({ updateJob: j });
+        res.status(201).json({});
     } catch (error) {
         next(error);
     }

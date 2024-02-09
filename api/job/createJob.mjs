@@ -14,19 +14,19 @@ export async function createJob(req, res, next) {
         name,
         hourPrice,
         workdayTimes,
-        paymentLapse,
-        nextPaymentDate,
+        lastPayment,
+        nextPayment,
         companyName,
     } = req.body;
 
     try {
-        const user = await userModel.findById(req.userId);
+        const user = await userModel.findById(req.user.userId);
         const newJob = new jobModel({
             name,
             hourPrice,
             workdayTimes,
-            paymentLapse,
-            nextPaymentDate,
+            lastPayment,
+            nextPayment,
             companyName,
             user,
         });

@@ -1,32 +1,28 @@
 //#region Dependency list
+import { jobModel } from "../../models/job.mjs";
 import { paymentModel } from "../../models/payment.mjs";
-import { userModel } from "../../models/user.mjs";
 import { setError } from "../../utils/error-setter.mjs";
+import { getId } from "../../utils/tools.mjs";
 //import { getId } from "../../utils/tools.mjs";
 //#endregion
 
 export async function getLastPayment(req, res, next) {
     try {
-        const { jobId } = req.query;
-        if (!jobId) setError("Missing required param", 422, errors.array());
+        const { jobId, startDate, endDate } = req.query;
+        if (!jobId || !startDate || !endDate)
+            setError("Missing required param", 422);
 
-        const payment = await paymentModel
-            .findOne({
-                user: req.user.userId,
-                job: jobId,
-            })
-            .sort({ endDate: 1 });
+        const job = await jobModel
+            .findById(jobId)
+            .populate({ path: "currentPayment" });
+        const payments = await paymentModel.findById(jobId);
 
-        // const shiftList = shifts.map((shift) => {
-        //     return {
-        //         jobPositionId: getId(shift.job),
-        //         isHoliday: shift.isHoliday,
-        //         startTime: shift.startTime,
-        //         endTime: shift.endTime,
-        //     };
-        // });
+        const sortedPayments = payments.filter(
+            (p) =>
+                getId(p) !== getId(job.currentPayment) && p.endDate < startDate
+        );
 
-        res.status(201).json(payment);
+        res.status(201).json(sortedPayments[0]);
     } catch (error) {
         next(error);
     }

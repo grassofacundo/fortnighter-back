@@ -3,6 +3,10 @@ import { Router } from "express";
 import { createJob, validCreateJob } from "../api/job/createJob.mjs";
 import { getAllJobs } from "../api/job/getAll.mjs";
 import { updateJob, validUpdateJob } from "../api/job/updateJob.mjs";
+import {
+    createPayment,
+    validCreatePayment,
+} from "../api/payment/createPayment.mjs";
 //#endregion
 
 export const router = Router();

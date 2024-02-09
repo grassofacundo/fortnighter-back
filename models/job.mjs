@@ -1,4 +1,5 @@
 import { Schema, model } from "mongoose";
+import { getFutureDate } from "../utils/dateHelper.mjs";
 
 const jobSchema = new Schema(
     {
@@ -154,11 +155,11 @@ const jobSchema = new Schema(
                 },
             },
         },
-        paymentLapse: {
-            type: Number,
+        nextPayment: {
+            type: Date,
             required: true,
         },
-        nextPaymentDate: {
+        lastPayment: {
             type: Date,
             required: true,
         },
@@ -175,9 +176,18 @@ const jobSchema = new Schema(
     { timestamps: true }
 );
 
-export const jobModel = model("Job", jobSchema);
+jobSchema.methods.updateAfterPayment = async function () {
+    const paymentLapse = getDaysBetweenDates(
+        this.lastPayment,
+        this.nextPayment
+    );
+    this.lastPayment = this.nextPayment;
+    this.nextPayment = getFutureDate(paymentLapse, this.nextPayment);
+    await this.save();
+    return {
+        newLastPayment: this.lastPayment,
+        newNextPayment: this.nextPayment,
+    };
+};
 
-/*
-My regular workday during [week, saturday, sunday, holiday] is from [hour1] to [hour2] and the price is [price1]. Then, from [hour2] to [hour1], the overtime price is [price2].
-My regular workday is [hoursAmount] length, after those hours, the overwork price is [price3]
-*/
+export const jobModel = model("Job", jobSchema);

@@ -2,7 +2,10 @@
 import { Router } from "express";
 import { getAllPayments } from "../api/payment/getAll.mjs";
 import { getLastPayment } from "../api/payment/getLast.mjs";
-import { createPayment, validCreatePayment } from "../api/payment/create.mjs";
+import {
+    createPayment,
+    validCreatePayment,
+} from "../api/payment/createPayment.mjs";
 //#endregion
 
 export const router = Router();

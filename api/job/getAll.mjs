@@ -37,8 +37,8 @@ export async function getAllJobs(req, res, next) {
                     name: job.name,
                     hourPrice: cleanedHourPrice,
                     workdayTimes: cleanedWorkdayTimes,
-                    paymentLapse: job.paymentLapse,
-                    nextPaymentDate: job.nextPaymentDate,
+                    lastPayment: job.lastPayment,
+                    nextPayment: job.nextPayment,
                     companyName: job.companyName,
                     modifiers: job.modifiers,
                 });
