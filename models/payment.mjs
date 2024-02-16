@@ -18,15 +18,15 @@ const paymentSchema = new Schema(
             week: {
                 regular: {
                     type: Number,
-                    required: false,
+                    required: true,
                 },
                 overtime: {
                     type: Number,
-                    required: false,
+                    required: true,
                 },
                 overwork: {
                     type: Number,
-                    required: false,
+                    required: true,
                 },
             },
             saturday: {

@@ -1,29 +1,32 @@
 //#region Dependency list
 import { paymentModel } from "../../models/payment.mjs";
 import { setError } from "../../utils/error-setter.mjs";
+import { getId } from "../../utils/tools.mjs";
 //import { getId } from "../../utils/tools.mjs";
 //#endregion
 
-export async function getAllPayments(req, res, next) {
+export async function getPaginationPayments(req, res, next) {
     try {
-        const { jobId } = req.query;
+        const { jobId, page } = req.query;
         if (!jobId) setError("Missing required param", 422, errors.array());
+        const pageNum = Number(page);
 
-        const payments = await paymentModel.find({
-            user: req.user.userId,
-            job: jobPositionId,
-        });
+        const payments = pageNum
+            ? await paymentModel.find({
+                  job: jobId,
+              })
+            : await paymentModel
+                  .find({
+                      job: jobId,
+                  })
+                  .skip((pageNum - 1) * 5)
+                  .limit(5);
 
-        // const shiftList = shifts.map((shift) => {
-        //     return {
-        //         jobPositionId: getId(shift.job),
-        //         isHoliday: shift.isHoliday,
-        //         startTime: shift.startTime,
-        //         endTime: shift.endTime,
-        //     };
-        // });
-
-        res.status(201).json(payments);
+        res.status(201).json(
+            payments.map((p) => {
+                return { ...p._doc, id: getId(p) };
+            })
+        );
     } catch (error) {
         next(error);
     }

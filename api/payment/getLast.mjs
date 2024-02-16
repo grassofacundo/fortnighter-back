@@ -2,27 +2,21 @@
 import { jobModel } from "../../models/job.mjs";
 import { paymentModel } from "../../models/payment.mjs";
 import { setError } from "../../utils/error-setter.mjs";
-import { getId } from "../../utils/tools.mjs";
-//import { getId } from "../../utils/tools.mjs";
 //#endregion
 
 export async function getLastPayment(req, res, next) {
     try {
-        const { jobId, startDate, endDate } = req.query;
-        if (!jobId || !startDate || !endDate)
-            setError("Missing required param", 422);
+        const { jobId } = req.query;
+        if (!jobId) setError("Missing required param", 422);
 
-        const job = await jobModel
-            .findById(jobId)
-            .populate({ path: "currentPayment" });
-        const payments = await paymentModel.findById(jobId);
+        const job = await jobModel.findById(jobId);
+        const payments = await paymentModel.find({ job });
 
-        const sortedPayments = payments.filter(
-            (p) =>
-                getId(p) !== getId(job.currentPayment) && p.endDate < startDate
-        );
+        let sortedPayments = [];
+        if (payments)
+            sortedPayments = payments.sort((x, y) => x.endDate - y.endDate);
 
-        res.status(201).json(sortedPayments[0]);
+        res.status(201).json(sortedPayments ? sortedPayments[0] : undefined);
     } catch (error) {
         next(error);
     }

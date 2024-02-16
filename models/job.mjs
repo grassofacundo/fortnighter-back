@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-import { getFutureDate } from "../utils/dateHelper.mjs";
+import { getDaysBetweenDates, getFutureDate } from "../utils/dateHelper.mjs";
 
 const jobSchema = new Schema(
     {
@@ -181,13 +181,12 @@ jobSchema.methods.updateAfterPayment = async function () {
         this.lastPayment,
         this.nextPayment
     );
-    this.lastPayment = this.nextPayment;
-    this.nextPayment = getFutureDate(paymentLapse, this.nextPayment);
+    const newLastPayment = structuredClone(this.nextPayment);
+    const newNextPayment = getFutureDate(paymentLapse, this.nextPayment);
+    this.lastPayment = newLastPayment;
+    this.nextPayment = newNextPayment;
     await this.save();
-    return {
-        newLastPayment: this.lastPayment,
-        newNextPayment: this.nextPayment,
-    };
+    return { newLastPayment, newNextPayment };
 };
 
 export const jobModel = model("Job", jobSchema);
