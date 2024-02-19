@@ -185,6 +185,7 @@ jobSchema.methods.updateAfterPayment = async function () {
     const newNextPayment = getFutureDate(paymentLapse, this.nextPayment);
     this.lastPayment = newLastPayment;
     this.nextPayment = newNextPayment;
+
     await this.save();
     return { newLastPayment, newNextPayment };
 };

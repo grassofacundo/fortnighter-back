@@ -20,7 +20,7 @@ export async function updateShift(req, res, next) {
         if (forcedTotal !== shift.forcedTotal) shift.forcedTotal = forcedTotal;
         await shift.save();
 
-        res.status(201).send();
+        res.status(201).send({});
     } catch (error) {
         next(error);
     }

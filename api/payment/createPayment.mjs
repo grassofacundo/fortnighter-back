@@ -13,17 +13,13 @@ export async function createPayment(req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) setError("Validation failed", 422, errors.array());
 
-    const { startDate, endDate, hourPrice, modifiers, shifts, jobId } =
-        req.body;
+    const { shifts, jobId } = req.body;
 
     try {
         const job = await jobModel.findById(jobId);
         if (!job) setError("Error getting job from database");
-
         const user = await userModel.findById(req.user.userId);
-        const modifiersArr = modifiers.map(
-            (m) => new modifierModel({ ...m, user, job })
-        );
+        const modifiers = await modifierModel.find({ user, job });
 
         const shiftsArr = shifts.map(
             (s) =>
@@ -38,16 +34,20 @@ export async function createPayment(req, res, next) {
         );
 
         const newPayment = new paymentModel({
-            startDate: new Date(startDate),
-            endDate: new Date(endDate),
-            hourPrice,
-            modifiers: modifiersArr,
+            startDate: job.lastPayment,
+            endDate: job.nextPayment,
+            hourPrice: job.hourPrice,
+            workdayTimes: job.workdayTimes,
+            modifiers,
             shifts: shiftsArr,
             job,
         });
         const payment = await newPayment.save();
 
         const newDates = await job.updateAfterPayment();
+        /*
+        Remove any "By payment" modifier    
+        */
 
         res.status(201).json({
             paymentId: getId(payment),
@@ -59,4 +59,4 @@ export async function createPayment(req, res, next) {
     }
 }
 
-export const validCreatePayment = [body("startDate").not().isEmpty()];
+export const validCreatePayment = [body("jobId").not().isEmpty()];

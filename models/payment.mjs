@@ -72,6 +72,96 @@ const paymentSchema = new Schema(
                 },
             },
         },
+        workdayTimes: {
+            week: {
+                startTime: {
+                    type: String,
+                    required: true,
+                },
+                startMeridian: {
+                    type: String,
+                    required: true,
+                },
+                endTime: {
+                    type: String,
+                    required: true,
+                },
+                endMeridian: {
+                    type: String,
+                    required: true,
+                },
+                length: {
+                    type: Number,
+                    required: true,
+                },
+            },
+            saturday: {
+                startTime: {
+                    type: String,
+                    required: false,
+                },
+                startMeridian: {
+                    type: String,
+                    required: false,
+                },
+                endTime: {
+                    type: String,
+                    required: false,
+                },
+                endMeridian: {
+                    type: String,
+                    required: false,
+                },
+                length: {
+                    type: Number,
+                    required: false,
+                },
+            },
+            sunday: {
+                startTime: {
+                    type: String,
+                    required: false,
+                },
+                startMeridian: {
+                    type: String,
+                    required: false,
+                },
+                endTime: {
+                    type: String,
+                    required: false,
+                },
+                endMeridian: {
+                    type: String,
+                    required: false,
+                },
+                length: {
+                    type: Number,
+                    required: false,
+                },
+            },
+            holiday: {
+                startTime: {
+                    type: String,
+                    required: false,
+                },
+                startMeridian: {
+                    type: String,
+                    required: false,
+                },
+                endTime: {
+                    type: String,
+                    required: false,
+                },
+                endMeridian: {
+                    type: String,
+                    required: false,
+                },
+                length: {
+                    type: Number,
+                    required: false,
+                },
+            },
+        },
         modifiers: [
             {
                 name: {
