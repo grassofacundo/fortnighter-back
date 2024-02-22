@@ -29,7 +29,13 @@ export async function getAllJobs(req, res, next) {
                         byAmount: removeEmptyProperties(m.byAmount),
                         amount: removeEmptyProperties(m.amount),
                     };
-                    job.modifiers.push(newModifier);
+                    const isShift = !!newModifier.byShift?.forEvery;
+                    const isAmount = !!newModifier.byAmount?.amount;
+                    const isPayment =
+                        !!newModifier.byPayment?.isByPayment &&
+                        !newModifier.byPayment.payment;
+                    if (isShift || isAmount || isPayment)
+                        job.modifiers.push(newModifier);
                 });
 
                 jobList.push({
