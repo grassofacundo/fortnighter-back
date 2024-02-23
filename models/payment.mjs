@@ -175,8 +175,7 @@ const paymentSchema = new Schema(
                     },
                 },
                 byPayment: {
-                    type: Schema.Types.ObjectId,
-                    ref: "Payment",
+                    type: Boolean,
                     required: false,
                 },
                 byAmount: {

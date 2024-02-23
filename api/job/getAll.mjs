@@ -31,9 +31,7 @@ export async function getAllJobs(req, res, next) {
                     };
                     const isShift = !!newModifier.byShift?.forEvery;
                     const isAmount = !!newModifier.byAmount?.amount;
-                    const isPayment =
-                        !!newModifier.byPayment?.isByPayment &&
-                        !newModifier.byPayment.payment;
+                    const isPayment = newModifier.byPayment;
                     if (isShift || isAmount || isPayment)
                         job.modifiers.push(newModifier);
                 });

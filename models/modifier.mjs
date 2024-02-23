@@ -13,15 +13,8 @@ const modifierSchema = new Schema(
             },
         },
         byPayment: {
-            isByPayment: {
-                type: Boolean,
-                required: false,
-            },
-            payment: {
-                type: Schema.Types.ObjectId,
-                ref: "Payment",
-                required: false,
-            },
+            type: Boolean,
+            required: false,
         },
         byAmount: {
             moreThan: {

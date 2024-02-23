@@ -44,15 +44,13 @@ export async function createPayment(req, res, next) {
         });
         const payment = await newPayment.save();
 
-        const newDates = await job.updateAfterPayment();
-        /*
-        Remove any "By payment" modifier    
-        */
+        await job.updateDatesAfterPayment();
+        await modifierModel.deleteMany({ byPayment: true });
 
         res.status(201).json({
             paymentId: getId(payment),
-            newLastPayment: newDates.newLastPayment,
-            newNextPayment: newDates.newNextPayment,
+            newLastPayment: job.lastPayment,
+            newNextPayment: job.nextPayment,
         });
     } catch (error) {
         next(error);

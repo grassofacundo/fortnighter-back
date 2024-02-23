@@ -176,7 +176,7 @@ const jobSchema = new Schema(
     { timestamps: true }
 );
 
-jobSchema.methods.updateAfterPayment = async function () {
+jobSchema.methods.updateDatesAfterPayment = async function () {
     const paymentLapse = getDaysBetweenDates(
         this.lastPayment,
         this.nextPayment
@@ -187,7 +187,6 @@ jobSchema.methods.updateAfterPayment = async function () {
     this.nextPayment = newNextPayment;
 
     await this.save();
-    return { newLastPayment, newNextPayment };
 };
 
 export const jobModel = model("Job", jobSchema);
