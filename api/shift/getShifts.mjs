@@ -10,7 +10,9 @@ export async function getShifts(req, res, next) {
         if (!startDate || !endDate || !jobPositionId)
             setError("Validation failed", 422, errors.array());
 
-        const start = new Date(`${startDate}T23:59:59`);
+        const tomorrow = new Date(startDate);
+        tomorrow.setDate(new Date(startDate).getDate() + 1);
+        const start = tomorrow;
         const end = new Date(`${endDate}T23:59:59`);
         const shifts = await shiftModel.find({
             user: req.user.userId,
