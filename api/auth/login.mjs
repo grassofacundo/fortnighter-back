@@ -44,11 +44,13 @@ export async function login(req, res, next) {
                 SameSite: "None",
                 maxAge: 60000 * 60,
                 secure: true,
+                domain: "https://fortnighter.netlify.app/",
             })
             .cookie("refreshToken", refreshToken, {
                 SameSite: "None",
                 maxAge: 31536000,
                 secure: true,
+                domain: "https://fortnighter.netlify.app/",
             })
             .json({
                 user: {

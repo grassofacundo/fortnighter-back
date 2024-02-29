@@ -43,6 +43,7 @@ export const isAuth = async (req, res, next) => {
             SameSite: "None",
             maxAge: 60000 * 60,
             secure: true,
+            domain: "https://fortnighter.netlify.app/",
         });
         req.user = newTokenPayload;
     } catch (error) {

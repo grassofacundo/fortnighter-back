@@ -7,12 +7,14 @@ export async function logout(req, res, next) {
         maxAge: 0,
         SameSite: "None",
         secure: true,
+        domain: "https://fortnighter.netlify.app/",
     });
 
     res.cookie("refreshToken", "", {
         maxAge: 0,
         SameSite: "None",
         secure: true,
+        domain: "https://fortnighter.netlify.app/",
     });
 
     const { sessionId } = req.body;
