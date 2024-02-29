@@ -3,19 +3,8 @@ import { sessionModel } from "../../models/session.mjs";
 //#endregion
 
 export async function logout(req, res, next) {
-    res.cookie("accessToken", "", {
-        maxAge: 0,
-        SameSite: "None",
-        secure: true,
-        domain: "https://fortnighter.netlify.app/",
-    });
-
-    res.cookie("refreshToken", "", {
-        maxAge: 0,
-        SameSite: "None",
-        secure: true,
-        domain: "https://fortnighter.netlify.app/",
-    });
+    res.cookie("accessToken", "", getCookieProperties());
+    res.cookie("refreshToken", "", getCookieProperties());
 
     const { sessionId } = req.body;
 

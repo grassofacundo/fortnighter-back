@@ -6,6 +6,7 @@ import { userModel } from "../../models/user.mjs";
 import { signJWT } from "../../utils/jws.mjs";
 import { sessionModel } from "../../models/session.mjs";
 import { getId } from "../../utils/tools.mjs";
+import { getCookieProperties } from "../../utils/cookie-helper.mjs";
 //#endregion
 
 export async function login(req, res, next) {
@@ -40,18 +41,8 @@ export async function login(req, res, next) {
         const refreshToken = signJWT({ sessionId }, "1y");
 
         res.status(200)
-            .cookie("accessToken", accessToken, {
-                SameSite: "None",
-                maxAge: 60000 * 60,
-                secure: true,
-                domain: "https://fortnighter.netlify.app/",
-            })
-            .cookie("refreshToken", refreshToken, {
-                SameSite: "None",
-                maxAge: 31536000,
-                secure: true,
-                domain: "https://fortnighter.netlify.app/",
-            })
+            .cookie("accessToken", accessToken, getCookieProperties())
+            .cookie("refreshToken", refreshToken, getCookieProperties(31536000))
             .json({
                 user: {
                     name: user.name,

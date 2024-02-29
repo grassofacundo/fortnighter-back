@@ -39,12 +39,7 @@ export const isAuth = async (req, res, next) => {
         };
         const newAccessToken = signJWT(newTokenPayload, "1h");
 
-        res.cookie("accessToken", newAccessToken, {
-            SameSite: "None",
-            maxAge: 60000 * 60,
-            secure: true,
-            domain: "https://fortnighter.netlify.app/",
-        });
+        res.cookie("accessToken", newAccessToken, getCookieProperties());
         req.user = newTokenPayload;
     } catch (error) {
         next(error);
