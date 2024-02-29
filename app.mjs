@@ -49,6 +49,25 @@ app.use("/modifier", modifierRoute);
  */
 app.use(errorHandler);
 
-connect(process.env.MONGOOSE_CONNECTION_STRING)
-    .then(() => app.listen(8181))
-    .catch((error) => console.error(error));
+const fixieData = process.env.FIXIE_SOCKS_HOST.split(new RegExp("[/(:\\/@/]+"));
+const port = process.env.PORT || 8181;
+try {
+    connect(process.env.MONGOOSE_CONNECTION_STRING, {
+        proxyUsername: fixieData[0],
+        proxyPassword: fixieData[1],
+        proxyHost: fixieData[2],
+        proxyPort: fixieData[3],
+    })
+        .then(() => {
+            console.log("Connected to Mongo DB!");
+            console.log("Connected to Mongo DB!");
+            app.listen(port);
+        })
+        .catch((error) => {
+            console.error("Error connecting to Mongo DB");
+            console.error(error);
+        });
+} catch (error) {
+    console.error("Error connecting to Mongo DB");
+    console.error(error);
+}
