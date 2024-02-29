@@ -3,7 +3,7 @@ import multer from "multer";
 import { v4 as uuidv4 } from "uuid";
 
 const corsOptions = {
-    origin: ["http://localhost:5173"],
+    origin: [process.env.FRONT_URL],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
 };
