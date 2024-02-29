@@ -64,10 +64,10 @@ try {
             app.listen(port);
         })
         .catch((error) => {
-            console.error("Error connecting to Mongo DB");
+            console.error("[CATCH AFTER THEN] Error connecting to Mongo DB");
             console.error(error);
         });
 } catch (error) {
-    console.error("Error connecting to Mongo DB");
+    console.error("[GENERAL CATCH] Error connecting to Mongo DB");
     console.error(error);
 }
