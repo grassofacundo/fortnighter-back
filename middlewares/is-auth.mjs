@@ -4,7 +4,7 @@ import { signJWT, verifyJWT } from "../utils/jws.mjs";
 import { getId } from "../utils/tools.mjs";
 
 export const isAuth = async (req, res, next) => {
-    const { accessToken, refreshToken } = req.cookies; //Check, maybe we won't need cookie parser
+    const { accessToken, refreshToken } = req.cookies;
 
     try {
         if (accessToken) {

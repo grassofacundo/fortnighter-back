@@ -45,6 +45,7 @@ export async function login(req, res, next) {
             .cookie("refreshToken", refreshToken, getCookieProperties(31536000))
             .json({
                 user: {
+                    id: sessionId,
                     name: user.name,
                     email: user.email,
                     jobs: user.jobs,
